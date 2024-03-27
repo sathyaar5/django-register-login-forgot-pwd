@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+{% block start %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 100px auto; /* Center the form */
+        background-color: #fff; /* White background */
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    .form {
+        max-width: 300px; /* Limit the width of the form */
+        margin: 0 auto; /* Center the form within the container */
+    }
+
+    .form-control {
+        border-radius: 4px;
+        box-shadow: none; /* Remove default input box shadow */
+    }
+
+    .btn {
+        border-radius: 4px;
+    }
+</style>
+
+<div class="container">
+    <form method="post" class="form" id="form">
+        <h1 class="mb-4 text-center">Login</h1>
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username"  class="form-control" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password"  class="form-control" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+            <a href="{% url 'forget_password'%}" class="mr-2 text-decoration-none">Forget Password</a>
+            <span class="text-muted">|</span>
+            <a href="{% url 'register'%}" class="ml-2 text-decoration-none">Register</a>
+        </div>
+        <button class="btn btn-danger btn-block mt-4" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
